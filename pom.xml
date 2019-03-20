@@ -25,6 +25,8 @@
 	<modules>
 		<module>airgonaut-api</module>
 		<module>airgonaut-engine</module>
+
+		<module>airgonaut-email</module>
 	</modules>
 
 	<!-- License -->

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import se.l4.airgonaut.NotificationData;
-import se.l4.airgonaut.NotificationException;
 import se.l4.airgonaut.channels.ContactChannel;
 
 /**
@@ -45,9 +44,6 @@ public interface NotificationTargetEncounter<Channel extends ContactChannel>
 	 *   the type of renderer to use
 	 * @return
 	 *   renderer
-	 * @throws NotificationException
-	 *   if unable to find a renderer for the data
-	 *
 	 */
 	<D extends NotificationData, R extends NotificationRenderer<D, ?>> Optional<R> findRenderer(Class<D> data, Class<R> type);
 

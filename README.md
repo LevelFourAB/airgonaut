@@ -15,7 +15,7 @@ Airgonaut provides:
 
 * An interface to trigger notifications in your backend
 * Multiple targets, such as e-mail and sms, with individual rendering for each target
-* Support for digests, per platform and type of notification
+* Planned: Support for digests, per notification target and type of notification
 
 ## Status
 
@@ -60,28 +60,28 @@ Example:
 
 ```java
 // Data for the notification
-class NewMessage {
+class NewMessage implements NotificationData {
   User from;
   String plainText;
 }
 
 // Renderer for the e-mail
-class NewMessageEmail implements EmailRenderer<NewMessage> {
+class NewMessageEmailRenderer implements EmailRenderer<NewMessage> {
   public void render(EmailRenderingEncounter<NewMessage> encounter) {
       NewMessage data = encounter.getData();
 
       encounter.setTitle("New message from " + data.getUser().getName());
       encounter.setPlainText("Message text: " + data.getPlainText());
-	}
+  }
 }
 ```
 
 Targets always work on a `ContactChannel` and every target supports different
 channels, such as the e-mail target supporting instances of `EmailChannel`.
 
-### Setting up `Notifications`
+## Setting up `Notifications`
 
-`Notifactions` is an interface and has an implementation in
+`Notifications` is an interface and has an implementation in
 `LocalNotifications`. You should create a single instance and share it
 through your system.
 
