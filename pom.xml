@@ -26,6 +26,7 @@
 		<module>airgonaut-api</module>
 		<module>airgonaut-engine</module>
 
+		<module>airgonaut-template-dust</module>
 		<module>airgonaut-email</module>
 	</modules>
 
