@@ -6,6 +6,9 @@ import se.l4.airgonaut.NotificationData;
 import se.l4.airgonaut.channels.EmailChannel;
 import se.l4.airgonaut.email.EmailRenderingEncounter;
 import se.l4.airgonaut.engine.RenderingType;
+import se.l4.airgonaut.engine.template.HTMLString;
+import se.l4.airgonaut.engine.template.PlainTextString;
+import se.l4.airgonaut.engine.template.TemplateEngine;
 
 /**
  * Implementation of {@link EmailRenderingEncounter}.
@@ -83,6 +86,15 @@ public class EmailRenderingEncounterImpl<D extends NotificationData>
 		this.plainText = text;
 	}
 
+	@Override
+	public <TemplateData> void setPlainText(TemplateEngine<? super TemplateData, PlainTextString> engine, TemplateData data)
+	{
+		Objects.requireNonNull(engine)	;
+		Objects.requireNonNull(data);
+
+		this.html = engine.render(data).getText();
+	}
+
 	/**
 	 * Get the HTML that was previously set by the renderer via
 	 * {@link #setHTML(String)}.
@@ -100,4 +112,12 @@ public class EmailRenderingEncounterImpl<D extends NotificationData>
 		this.html = rawHTML;
 	}
 
+	@Override
+	public <TemplateData> void setHTML(TemplateEngine<? super TemplateData, HTMLString> engine, TemplateData data)
+	{
+		Objects.requireNonNull(engine);
+		Objects.requireNonNull(data);
+
+		this.html = engine.render(data).getRaw();
+	}
 }

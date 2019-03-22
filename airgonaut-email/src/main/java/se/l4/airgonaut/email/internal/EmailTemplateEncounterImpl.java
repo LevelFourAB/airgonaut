@@ -8,6 +8,9 @@ import java.util.Optional;
 import se.l4.airgonaut.email.EmailTemplateEncounter;
 import se.l4.airgonaut.email.RenderedEmailNotification;
 import se.l4.airgonaut.engine.RenderingType;
+import se.l4.airgonaut.engine.template.HTMLString;
+import se.l4.airgonaut.engine.template.PlainTextString;
+import se.l4.airgonaut.engine.template.TemplateEngine;
 
 /**
  * Implementation of {@link EmailTemplateEncounter}.
@@ -78,6 +81,15 @@ public class EmailTemplateEncounterImpl
 		this.plainText = text;
 	}
 
+	@Override
+	public <TemplateData> void setPlainText(TemplateEngine<? super TemplateData, PlainTextString> engine, TemplateData data)
+	{
+		Objects.requireNonNull(engine)	;
+		Objects.requireNonNull(data);
+
+		this.html = engine.render(data).getText();
+	}
+
 	/**
 	 * Get the HTML that was previously set by the renderer via
 	 * {@link #setHTML(String)}.
@@ -93,6 +105,15 @@ public class EmailTemplateEncounterImpl
 		Objects.requireNonNull(rawHTML);
 
 		this.html = rawHTML;
+	}
+
+	@Override
+	public <TemplateData> void setHTML(TemplateEngine<? super TemplateData, HTMLString> engine, TemplateData data)
+	{
+		Objects.requireNonNull(engine)	;
+		Objects.requireNonNull(data);
+
+		this.html = engine.render(data).getRaw();
 	}
 
 	private static class RenderedEmailNotificationImpl
