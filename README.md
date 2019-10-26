@@ -5,7 +5,7 @@
 Airgonaut is a Java-library to help implement great notifications for your users.
 Great notifications are hard, especially when you take into accounts things
 such as multiple devices, the wish of users to receive notifications digested
-or only on some devices, and localizalization of messages.
+or only on some devices, and localization of messages.
 
 This library provides building blocks to implement notifications in your
 backend and to give both you and your users control over how notifications are
@@ -68,10 +68,10 @@ class NewMessage implements NotificationData {
 // Renderer for the e-mail
 class NewMessageEmailRenderer implements EmailRenderer<NewMessage> {
   public void render(EmailRenderingEncounter<NewMessage> encounter) {
-      NewMessage data = encounter.getData();
+    NewMessage data = encounter.getData();
 
-      encounter.setTitle("New message from " + data.getUser().getName());
-      encounter.setPlainText("Message text: " + data.getPlainText());
+    encounter.setTitle("New message from " + data.getUser().getName());
+    encounter.setPlainText("Message text: " + data.getPlainText());
   }
 }
 ```
@@ -106,4 +106,19 @@ Notifications notifications = LocalNotifications.builder()
   .withTypeFinder(typeFinder)
   .addTarget(emailTarget)
   .build();
+```
+
+### E-mail target
+
+E-mails are a common way to deliver notifications and this library provides
+support for rendering notifications into e-mails.
+
+To setup the e-mail target include a dependency on `airgonaut-email` and create
+a target:
+
+```java
+new EmailTarget(
+  new EmailBackendHere(),
+  emailTemplateRenderer
+)
 ```
