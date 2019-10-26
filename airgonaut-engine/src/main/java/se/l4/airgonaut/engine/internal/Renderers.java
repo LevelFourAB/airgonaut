@@ -31,7 +31,7 @@ public class Renderers
 		}
 	}
 
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	public <D extends NotificationData, T extends NotificationRenderer<D, ?>> Optional<T> find(Class<? super T> rendererType, Class<D> dataType)
 	{
 		// TODO: Introduce caching here
@@ -39,7 +39,7 @@ public class Renderers
 		{
 			if(rendererType.isAssignableFrom(e.getData().getClass()))
 			{
-				return Optional.of((NotificationRenderer) e.getData());
+				return Optional.of((T) e.getData());
 			}
 		}
 
