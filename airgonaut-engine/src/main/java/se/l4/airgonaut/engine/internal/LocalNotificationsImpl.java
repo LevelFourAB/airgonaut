@@ -11,8 +11,12 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import se.l4.airgonaut.NotificationBuilder;
 import se.l4.airgonaut.NotificationData;
+import se.l4.airgonaut.NotificationException;
 import se.l4.airgonaut.NotificationReceiver;
 import se.l4.airgonaut.Notifications;
 import se.l4.airgonaut.channels.ContactChannel;
@@ -28,11 +32,15 @@ import se.l4.airgonaut.engine.RenderingType;
 public class LocalNotificationsImpl
 	implements LocalNotifications
 {
+	private final Logger log;
+
 	private final Renderers renderers;
 	private final NotificationTarget[] targets;
 
 	LocalNotificationsImpl(Renderers renderers, List<NotificationTarget<?>> targets)
 	{
+		log = LoggerFactory.getLogger(LocalNotifications.class);
+
 		this.renderers = renderers;
 		this.targets = targets.toArray(new NotificationTarget[targets.size()]);
 	}
@@ -73,7 +81,13 @@ public class LocalNotificationsImpl
 		if(renderableData.isEmpty())
 		{
 			// There is no data to be rendered - skip everything
+			log.debug("Skipping sending to {}, no renderers available for target", channel);
 			return;
+		}
+
+		if(log.isDebugEnabled())
+		{
+			log.debug("Rendering and sending {} to {}", data, channel);
 		}
 
 		// Depending on the amount of of data either request single or multiple rendering
@@ -132,6 +146,16 @@ public class LocalNotificationsImpl
 		@Override
 		public void send()
 		{
+			if(data.isEmpty())
+			{
+				throw new NotificationException("At least one instance of NotificationData is required to send notification");
+			}
+
+			if(channels.isEmpty() && receivers.isEmpty())
+			{
+				throw new NotificationException("At least one ContactChannel or one NotificationReceiver is needed to send notification");
+			}
+
 			Multimap<ContactChannel, NotificationData> dataPerChannel = ArrayListMultimap.create();
 
 			/*
@@ -162,10 +186,17 @@ public class LocalNotificationsImpl
 				}
 			}
 
+			if(log.isDebugEnabled())
+			{
+				// Log information about the final channels if debug is active
+				log.debug("Sending notification to {}", dataPerChannel.keySet());
+			}
+
 			/*
 			 * Go through all the channels and decide which receiver is going
 			 * to handle them.
 			 */
+			_outer:
 			for(ContactChannel channel : dataPerChannel.keySet())
 			{
 				for(NotificationTarget<?> target : targets)
@@ -176,8 +207,13 @@ public class LocalNotificationsImpl
 						sendNotification(target, channel, dataPerChannel.get(channel));
 
 						// Break so no other targets handle the channel
-						break;
+						continue _outer;
 					}
+				}
+
+				if(log.isDebugEnabled())
+				{
+					log.debug("Channel {} not supported by any active NotificationTarget", channel);
 				}
 			}
 		}
