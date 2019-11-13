@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Simple static implementation of {@link Email}.
+ * Simple static implementation of {@link EmailChannel}.
  */
 public class DefaultEmailChannel
 	implements EmailChannel
