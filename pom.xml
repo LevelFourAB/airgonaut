@@ -28,7 +28,9 @@
 		<module>airgonaut-engine</module>
 
 		<module>airgonaut-template-dust</module>
+
 		<module>airgonaut-email</module>
+		<module>airgonaut-email-mailgun</module>
 	</modules>
 
 	<!-- License -->
