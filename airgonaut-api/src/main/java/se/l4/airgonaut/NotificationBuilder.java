@@ -37,7 +37,9 @@ public interface NotificationBuilder
 	 * created.
 	 *
 	 * @param data
+	 *   data of the notification
 	 * @return
+	 *   self
 	 */
 	NotificationBuilder withData(NotificationData data);
 
@@ -45,18 +47,28 @@ public interface NotificationBuilder
 	 * Add a receiver of this notification.
 	 *
 	 * @param receiver
+	 *   receiver that will be asked about channels to send notification
 	 * @return
+	 *   self
 	 */
 	NotificationBuilder to(NotificationReceiver receiver);
 
 	/**
 	 * Add a receiver via a contact channel. Contact channels will always be
 	 * sent the final notification.
+	 *
+	 * @param channel
+	 *   the channel to send to
+	 * @return
+	 *   self
 	 */
 	NotificationBuilder to(ContactChannel channel);
 
 	/**
 	 * Send this notification to all the receivers.
+	 *
+	 * @throws NotificationException
+	 *   if the notification can not be sent
 	 */
 	void send();
 }

@@ -9,7 +9,10 @@ import se.l4.airgonaut.NotificationData;
 public interface EmailTemplate
 {
 	/**
-	 * Render the template wrapping the supplied {@link RenderedEmailNotification}s.
+	 * Render the final e-mail. This will receive the rendered notifications
+	 * and is responsible for putting that content in the overall template,
+	 * both for the text and HTML versions of the e-mail. It should also decide
+	 * on the title of the final e-mail.
 	 *
 	 * @param encounter
 	 *   the encounter containing rendering information

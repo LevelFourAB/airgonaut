@@ -57,10 +57,16 @@ public interface EmailTemplateEncounter
 	 * @param data
 	 *   the data to render
 	 */
-	<TemplateData> void setPlainText(TemplateEngine<? super TemplateData, PlainTextString> engine, TemplateData data);
+	<TemplateData> void setPlainText(
+		TemplateEngine<? super TemplateData, PlainTextString> engine,
+		TemplateData data
+	);
 
 	/**
 	 * Set the HTML of the final e-mail to be sent.
+	 *
+	 * @param html
+	 *   string containing the HTML document representing the e-mail
 	 */
 	void setHTML(@Nonnull String html);
 
@@ -72,5 +78,8 @@ public interface EmailTemplateEncounter
 	 * @param data
 	 *   the data to render
 	 */
-	<TemplateData> void setHTML(TemplateEngine<? super TemplateData, HTMLString> engine, TemplateData data);
+	<TemplateData> void setHTML(
+		TemplateEngine<? super TemplateData, HTMLString> engine,
+		TemplateData data
+	);
 }
