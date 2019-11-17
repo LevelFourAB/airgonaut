@@ -3,6 +3,8 @@ package se.l4.airgonaut.channels;
 import java.util.Objects;
 import java.util.Optional;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 /**
  * Simple static implementation of {@link EmailChannel}.
  */
@@ -12,7 +14,9 @@ public class DefaultEmailChannel
 	private final String email;
 	private final Optional<String> name;
 
-	public DefaultEmailChannel(String email, Optional<String> name)
+	public DefaultEmailChannel(
+		@NonNull String email,
+		@NonNull Optional<String> name)
 	{
 		Objects.requireNonNull(email);
 		Objects.requireNonNull(name);

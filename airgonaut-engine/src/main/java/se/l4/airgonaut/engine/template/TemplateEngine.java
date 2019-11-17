@@ -1,7 +1,6 @@
 package se.l4.airgonaut.engine.template;
 
-import javax.annotation.Nonnull;
-
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.engine.NotificationRenderException;
 
 /**
@@ -17,6 +16,6 @@ public interface TemplateEngine<TemplateData, Output>
 	 * @throws NotificationRenderException
 	 *   if unable to render the data
 	 */
-	@Nonnull
-	Output render(@Nonnull TemplateData data);
+	@NonNull
+	Output render(@NonNull TemplateData data);
 }

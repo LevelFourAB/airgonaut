@@ -2,6 +2,8 @@ package se.l4.airgonaut.engine.template;
 
 import java.util.Objects;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 /**
  * Container for HTML. Used to make it clear that a {@link TemplateEngine}
  * returns HTML.
@@ -10,7 +12,7 @@ public class HTMLString
 {
 	private final String raw;
 
-	public HTMLString(String raw)
+	public HTMLString(@NonNull String raw)
 	{
 		Objects.requireNonNull(raw);
 
@@ -23,6 +25,7 @@ public class HTMLString
 	 * @return
 	 *   raw HTML
 	 */
+	@NonNull
 	public String getRaw()
 	{
 		return raw;

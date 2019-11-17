@@ -5,8 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.channels.EmailChannel;
 import se.l4.airgonaut.email.RenderedEmail;
 
@@ -28,13 +27,13 @@ public class RenderedEmailImpl
 	private final Set<String> tags;
 
 	public RenderedEmailImpl(
-		@Nonnull EmailChannel from,
-		@Nonnull List<EmailChannel> to,
-		@Nonnull List<EmailChannel> cc,
-		@Nonnull String title,
-		@Nonnull Optional<String> plainText,
-		@Nonnull Optional<String> html,
-		@Nonnull Set<String> tags
+		@NonNull EmailChannel from,
+		@NonNull List<EmailChannel> to,
+		@NonNull List<EmailChannel> cc,
+		@NonNull String title,
+		@NonNull Optional<String> plainText,
+		@NonNull Optional<String> html,
+		@NonNull Set<String> tags
 	)
 	{
 		this.from = Objects.requireNonNull(from);

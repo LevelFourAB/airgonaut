@@ -2,6 +2,7 @@ package se.l4.airgonaut.email;
 
 import java.util.Optional;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.NotificationData;
 
 /**
@@ -16,6 +17,7 @@ public interface RenderedEmailNotification
 	 * @return
 	 *   optional with a title, or empty optional if no proposed title
 	 */
+	@NonNull
 	Optional<String> getProposedTitle();
 
 	/**
@@ -24,6 +26,7 @@ public interface RenderedEmailNotification
 	 * @return
 	 *   optional with plain text of the notification, or empty optional
 	 */
+	@NonNull
 	Optional<String> getPlainText();
 
 	/**
@@ -32,5 +35,6 @@ public interface RenderedEmailNotification
 	 * @return
 	 *   optional with HTML of the notificatio, or empty optional
 	 */
+	@NonNull
 	Optional<String> getHTML();
 }

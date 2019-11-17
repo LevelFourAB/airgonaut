@@ -1,5 +1,6 @@
 package se.l4.airgonaut.engine;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.NotificationData;
 
 /**
@@ -14,5 +15,5 @@ public interface NotificationRenderer<D extends NotificationData, Encounter exte
 	 * @param encounter
 	 *   the encounter describing
 	 */
-	void render(Encounter encounter);
+	void render(@NonNull Encounter encounter);
 }

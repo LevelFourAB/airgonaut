@@ -2,8 +2,7 @@ package se.l4.airgonaut.email;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.engine.RenderingType;
 import se.l4.airgonaut.engine.template.HTMLString;
 import se.l4.airgonaut.engine.template.PlainTextString;
@@ -21,7 +20,7 @@ public interface EmailTemplateEncounter
 	 * @return
 	 *   type being rendered
 	 */
-	@Nonnull
+	@NonNull
 	RenderingType getType();
 
 	/**
@@ -30,7 +29,7 @@ public interface EmailTemplateEncounter
 	 * @return
 	 *   list of rendered entries
 	 */
-	@Nonnull
+	@NonNull
 	List<RenderedEmailNotification> getEntries();
 
 	/**
@@ -39,7 +38,7 @@ public interface EmailTemplateEncounter
 	 * @param title
 	 *   the title
 	 */
-	void setTitle(@Nonnull String title);
+	void setTitle(@NonNull String title);
 
 	/**
 	 * Set the plain text of the final e-mail to be sent.
@@ -47,7 +46,7 @@ public interface EmailTemplateEncounter
 	 * @param text
 	 *   the text
 	 */
-	void setPlainText(@Nonnull String text);
+	void setPlainText(@NonNull String text);
 
 	/**
 	 * Set the plain text of the final e-mail to be sent.
@@ -58,8 +57,8 @@ public interface EmailTemplateEncounter
 	 *   the data to render
 	 */
 	<TemplateData> void setPlainText(
-		TemplateEngine<? super TemplateData, PlainTextString> engine,
-		TemplateData data
+		@NonNull TemplateEngine<? super TemplateData, PlainTextString> engine,
+		@NonNull TemplateData data
 	);
 
 	/**
@@ -68,7 +67,7 @@ public interface EmailTemplateEncounter
 	 * @param html
 	 *   string containing the HTML document representing the e-mail
 	 */
-	void setHTML(@Nonnull String html);
+	void setHTML(@NonNull String html);
 
 	/**
 	 * Set the HTML by rendering it using a template engine.
@@ -79,7 +78,7 @@ public interface EmailTemplateEncounter
 	 *   the data to render
 	 */
 	<TemplateData> void setHTML(
-		TemplateEngine<? super TemplateData, HTMLString> engine,
-		TemplateData data
+		@NonNull TemplateEngine<? super TemplateData, HTMLString> engine,
+		@NonNull TemplateData data
 	);
 }

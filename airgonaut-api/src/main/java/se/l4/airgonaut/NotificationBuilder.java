@@ -1,5 +1,6 @@
 package se.l4.airgonaut;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.channels.ContactChannel;
 
 /**
@@ -41,7 +42,8 @@ public interface NotificationBuilder
 	 * @return
 	 *   self
 	 */
-	NotificationBuilder withData(NotificationData data);
+	@NonNull
+	NotificationBuilder withData(@NonNull NotificationData data);
 
 	/**
 	 * Add a receiver of this notification.
@@ -51,7 +53,8 @@ public interface NotificationBuilder
 	 * @return
 	 *   self
 	 */
-	NotificationBuilder to(NotificationReceiver receiver);
+	@NonNull
+	NotificationBuilder to(@NonNull NotificationReceiver receiver);
 
 	/**
 	 * Add a receiver via a contact channel. Contact channels will always be
@@ -62,7 +65,8 @@ public interface NotificationBuilder
 	 * @return
 	 *   self
 	 */
-	NotificationBuilder to(ContactChannel channel);
+	@NonNull
+	NotificationBuilder to(@NonNull ContactChannel channel);
 
 	/**
 	 * Send this notification to all the receivers.

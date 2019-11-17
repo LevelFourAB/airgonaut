@@ -2,7 +2,9 @@ package se.l4.airgonaut.template.dust;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Objects;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.engine.NotificationRenderException;
 import se.l4.airgonaut.engine.template.TemplateEngine;
 import se.l4.dust.api.template.DefaultRenderingContext;
@@ -19,9 +21,9 @@ public class DustTemplateRenderer
 {
 	private final TemplateRenderer renderer;
 
-	public DustTemplateRenderer(TemplateRenderer renderer)
+	public DustTemplateRenderer(@NonNull TemplateRenderer renderer)
 	{
-		this.renderer = renderer;
+		this.renderer = Objects.requireNonNull(renderer);
 	}
 
 	@Override

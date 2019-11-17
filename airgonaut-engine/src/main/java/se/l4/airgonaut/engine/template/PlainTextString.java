@@ -2,6 +2,8 @@ package se.l4.airgonaut.engine.template;
 
 import java.util.Objects;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 /**
  * Container for plain text. Used to make it clear that a {@link TemplateEngine}
  * returns plain text.
@@ -10,7 +12,7 @@ public class PlainTextString
 {
 	private final String text;
 
-	public PlainTextString(String text)
+	public PlainTextString(@NonNull String text)
 	{
 		Objects.requireNonNull(text);
 
@@ -23,6 +25,7 @@ public class PlainTextString
 	 * @return
 	 *   raw text
 	 */
+	@NonNull
 	public String getText()
 	{
 		return text;

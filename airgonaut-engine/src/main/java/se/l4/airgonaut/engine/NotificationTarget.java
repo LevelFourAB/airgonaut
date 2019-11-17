@@ -1,7 +1,6 @@
 package se.l4.airgonaut.engine;
 
-import javax.annotation.Nonnull;
-
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.NotificationData;
 import se.l4.airgonaut.channels.ContactChannel;
 
@@ -22,7 +21,7 @@ public interface NotificationTarget<Channel extends ContactChannel>
 	 * @return
 	 *   a class that implements {@link NotificationRenderer}
 	 */
-	@Nonnull
+	@NonNull
 	Class<?> getRendererType();
 
 	/**
@@ -35,12 +34,12 @@ public interface NotificationTarget<Channel extends ContactChannel>
 	 * @return
 	 *   {@code true} if the channel is supported by this target
 	 */
-	boolean supportsChannel(@Nonnull ContactChannel channel);
+	boolean supportsChannel(@NonNull ContactChannel channel);
 
 	/**
 	 * Send the notification described by the given encounter. This will
 	 * be called with the {@link ContactChannel} and the {@link NotificationData}
 	 * that should be sent using the target.
 	 */
-	void send(@Nonnull NotificationTargetEncounter<Channel> encounter);
+	void send(@NonNull NotificationTargetEncounter<Channel> encounter);
 }

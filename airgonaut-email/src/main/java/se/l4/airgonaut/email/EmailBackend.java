@@ -2,6 +2,7 @@ package se.l4.airgonaut.email;
 
 import java.io.IOException;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.NotificationData;
 
 /**
@@ -24,6 +25,6 @@ public interface EmailBackend
 	 * @throws IOException
 	 *   if any I/O error occurs while sending the e-mail
 	 */
-	void send(RenderedEmail email)
+	void send(@NonNull RenderedEmail email)
 		throws IOException;
 }

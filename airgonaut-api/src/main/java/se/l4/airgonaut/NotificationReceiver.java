@@ -1,5 +1,6 @@
 package se.l4.airgonaut;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.channels.ContactChannel;
 
 /**
@@ -12,5 +13,5 @@ public interface NotificationReceiver
 	/**
 	 * Resolve how this receiver would like to get a specific notification.
 	 */
-	void resolveChannels(ChannelResolveEncounter encounter);
+	void resolveChannels(@NonNull ChannelResolveEncounter encounter);
 }

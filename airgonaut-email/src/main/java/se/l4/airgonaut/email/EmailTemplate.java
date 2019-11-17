@@ -1,5 +1,6 @@
 package se.l4.airgonaut.email;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.NotificationData;
 
 /**
@@ -17,5 +18,5 @@ public interface EmailTemplate
 	 * @param encounter
 	 *   the encounter containing rendering information
 	 */
-	void render(EmailTemplateEncounter encounter);
+	void render(@NonNull EmailTemplateEncounter encounter);
 }

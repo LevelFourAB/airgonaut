@@ -2,6 +2,7 @@ package se.l4.airgonaut.email;
 
 import org.apache.james.mime4j.codec.EncoderUtil;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.channels.EmailChannel;
 
 /**
@@ -18,7 +19,8 @@ public class EmailChannelEncoding
 	 * Encode the given channel into a format that includes the name if
 	 * available.
 	 */
-	public static String encode(EmailChannel channel)
+	@NonNull
+	public static String encode(@NonNull EmailChannel channel)
 	{
 		if(channel.getName().isPresent())
 		{

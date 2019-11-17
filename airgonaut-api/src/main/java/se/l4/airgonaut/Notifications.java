@@ -1,5 +1,7 @@
 package se.l4.airgonaut;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 /**
  * Send notifications to people. This interface is the main entry for services
  * that send notifications. Call {@link #newNotification()} to start building
@@ -23,5 +25,6 @@ public interface Notifications
 	 * @return
 	 *   builder used to add data and receivers of the notification
 	 */
+	@NonNull
 	NotificationBuilder newNotification();
 }

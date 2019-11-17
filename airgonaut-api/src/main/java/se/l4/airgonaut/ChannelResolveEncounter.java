@@ -3,6 +3,7 @@ package se.l4.airgonaut;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.channels.ContactChannel;
 
 /**
@@ -19,11 +20,13 @@ public interface ChannelResolveEncounter
 	 * @return
 	 *   notification data to be sent
 	 */
+	@NonNull
 	NotificationData getNotificationData();
 
 	/**
 	 * Get the channels that so far has been activated.
 	 */
+	@NonNull
 	Set<ContactChannel> getActiveChannels();
 
 	/**
@@ -34,7 +37,8 @@ public interface ChannelResolveEncounter
 	 * @return
 	 *   set containing the active channels
 	 */
-	Set<ContactChannel> getActiveChannels(Class<? extends ContactChannel> type);
+	@NonNull
+	Set<ContactChannel> getActiveChannels(@NonNull Class<? extends ContactChannel> type);
 
 	/**
 	 * Get the channels that match the given predicate.
@@ -44,7 +48,8 @@ public interface ChannelResolveEncounter
 	 * @return
 	 *   set containing the active channels
 	 */
-	Set<ContactChannel> getActiveChannels(Predicate<ContactChannel> predicate);
+	@NonNull
+	Set<ContactChannel> getActiveChannels(@NonNull Predicate<ContactChannel> predicate);
 
 	/**
 	 * Get if any channel has been activated for this receiver.
@@ -64,7 +69,7 @@ public interface ChannelResolveEncounter
 	 * @return
 	 *   {@code true} if any channel of the given type has been activated
 	 */
-	boolean hasActiveChannel(Class<? extends ContactChannel> type);
+	boolean hasActiveChannel(@NonNull Class<? extends ContactChannel> type);
 
 	/**
 	 * Get if a channel is active by matching against the given predicate.
@@ -74,11 +79,11 @@ public interface ChannelResolveEncounter
 	 * @return
 	 *   {@code true} if a channel matching given the predicate is active
 	 */
-	boolean hasActiveChannel(Predicate<ContactChannel> predicate);
+	boolean hasActiveChannel(@NonNull Predicate<ContactChannel> predicate);
 
 	/**
 	 * Activate this channel and request that the notification is delivered
 	 * right away.
 	 */
-	void activate(ContactChannel channel);
+	void activate(@NonNull ContactChannel channel);
 }

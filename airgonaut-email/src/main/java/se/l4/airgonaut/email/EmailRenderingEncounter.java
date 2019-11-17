@@ -1,5 +1,6 @@
 package se.l4.airgonaut.email;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.NotificationData;
 import se.l4.airgonaut.channels.EmailChannel;
 import se.l4.airgonaut.engine.RenderingEncounter;
@@ -19,6 +20,7 @@ public interface EmailRenderingEncounter<D extends NotificationData>
 	 * @return
 	 *   instance of {@link EmailChannel}
 	 */
+	@NonNull
 	EmailChannel getEmail();
 
 	/**
@@ -27,7 +29,7 @@ public interface EmailRenderingEncounter<D extends NotificationData>
 	 * @param title
 	 *   title of the e-mail
 	 */
-	void setTitle(String title);
+	void setTitle(@NonNull String title);
 
 	/**
 	 * Set the plain text copy of this notification.
@@ -35,7 +37,7 @@ public interface EmailRenderingEncounter<D extends NotificationData>
 	 * @param text
 	 *   plain text copy of the notification
 	 */
-	void setPlainText(String text);
+	void setPlainText(@NonNull String text);
 
 	/**
 	 * Set the plain text copy of this notification.
@@ -45,7 +47,10 @@ public interface EmailRenderingEncounter<D extends NotificationData>
 	 * @param data
 	 *   the data to render
 	 */
-	<TemplateData> void setPlainText(TemplateEngine<? super TemplateData, PlainTextString> engine, TemplateData data);
+	<TemplateData> void setPlainText(
+		@NonNull TemplateEngine<? super TemplateData, PlainTextString> engine,
+		@NonNull TemplateData data
+	);
 
 	/**
 	 * Set the raw HTML of this notification.
@@ -53,7 +58,7 @@ public interface EmailRenderingEncounter<D extends NotificationData>
 	 * @param rawHTML
 	 *   HTML in a raw form for this notification
 	 */
-	void setHTML(String rawHTML);
+	void setHTML(@NonNull String rawHTML);
 
 	/**
 	 * Set the HTML by rendering it using a template engine.
@@ -63,5 +68,8 @@ public interface EmailRenderingEncounter<D extends NotificationData>
 	 * @param data
 	 *   the data to render
 	 */
-	<TemplateData> void setHTML(TemplateEngine<? super TemplateData, HTMLString> engine, TemplateData data);
+	<TemplateData> void setHTML(
+		@NonNull TemplateEngine<? super TemplateData, HTMLString> engine,
+		@NonNull TemplateData data
+	);
 }

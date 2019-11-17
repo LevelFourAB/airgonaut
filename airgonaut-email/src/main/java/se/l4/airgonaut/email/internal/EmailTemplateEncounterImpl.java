@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.email.EmailTemplateEncounter;
 import se.l4.airgonaut.email.RenderedEmailNotification;
 import se.l4.airgonaut.engine.RenderingType;
@@ -25,7 +26,9 @@ public class EmailTemplateEncounterImpl
 	private String plainText;
 	private String html;
 
-	public EmailTemplateEncounterImpl(RenderingType type)
+	public EmailTemplateEncounterImpl(
+		@NonNull RenderingType type
+	)
 	{
 		this.type = type;
 		entries = new ArrayList<>();

@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import javax.annotation.Nonnull;
-
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.NotificationData;
 import se.l4.airgonaut.channels.ContactChannel;
 import se.l4.airgonaut.channels.EmailChannel;
@@ -31,9 +30,9 @@ public class EmailTarget
 	private final EmailTemplate template;
 
 	public EmailTarget(
-		@Nonnull EmailBackend backend,
-		@Nonnull EmailChannel defaultFrom,
-		@Nonnull EmailTemplate template
+		@NonNull EmailBackend backend,
+		@NonNull EmailChannel defaultFrom,
+		@NonNull EmailTemplate template
 	)
 	{
 		this.defaultFrom = Objects.requireNonNull(defaultFrom);

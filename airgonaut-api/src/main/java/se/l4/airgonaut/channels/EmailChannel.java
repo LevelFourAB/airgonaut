@@ -2,6 +2,8 @@ package se.l4.airgonaut.channels;
 
 import java.util.Optional;
 
+import edu.umd.cs.findbugs.annotations.NonNull;
+
 /**
  * E-mail address used for contacting a {@link se.l4.airgonaut.NotificationReceiver}.
  */
@@ -15,6 +17,7 @@ public interface EmailChannel
 	 * @return
 	 *   valid e-mail address, never {@code null}
 	 */
+	@NonNull
 	String getEmail();
 
 	/**
@@ -23,6 +26,7 @@ public interface EmailChannel
 	 * @return
 	 *   optional that is either empty or contains a human readable name
 	 */
+	@NonNull
 	Optional<String> getName();
 
 	/**
@@ -33,7 +37,8 @@ public interface EmailChannel
 	 * @return
 	 *   instance
 	 */
-	static EmailChannel create(String email)
+	@NonNull
+	static EmailChannel create(@NonNull String email)
 	{
 		return new DefaultEmailChannel(email, Optional.empty());
 	}
@@ -48,7 +53,8 @@ public interface EmailChannel
 	 * @return
 	 *   instance
 	 */
-	static EmailChannel create(String email, String name)
+	@NonNull
+	static EmailChannel create(@NonNull String email, @NonNull String name)
 	{
 		return new DefaultEmailChannel(email, Optional.of(name));
 	}
@@ -63,7 +69,8 @@ public interface EmailChannel
 	 * @return
 	 *   instance
 	 */
-	static EmailChannel create(String email, Optional<String> name)
+	@NonNull
+	static EmailChannel create(@NonNull String email, @NonNull Optional<String> name)
 	{
 		return new DefaultEmailChannel(email, name);
 	}

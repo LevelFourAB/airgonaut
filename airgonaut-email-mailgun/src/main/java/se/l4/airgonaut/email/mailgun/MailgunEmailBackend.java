@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.annotation.Nonnull;
-
+import edu.umd.cs.findbugs.annotations.NonNull;
 import kong.unirest.HttpResponse;
 import kong.unirest.MultipartBody;
 import kong.unirest.Unirest;
@@ -35,9 +34,9 @@ public class MailgunEmailBackend
 	private final String apiKey;
 
 	public MailgunEmailBackend(
-		@Nonnull String baseUrl,
-		@Nonnull String domain,
-		@Nonnull String apiKey
+		@NonNull String baseUrl,
+		@NonNull String domain,
+		@NonNull String apiKey
 	)
 	{
 		Objects.requireNonNull(baseUrl);

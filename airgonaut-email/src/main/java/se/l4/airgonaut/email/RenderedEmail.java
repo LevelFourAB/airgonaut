@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-
+import edu.umd.cs.findbugs.annotations.NonNull;
 import se.l4.airgonaut.channels.EmailChannel;
 
 /**
@@ -20,7 +19,7 @@ public interface RenderedEmail
 	 *
 	 * @return
 	 */
-	@Nonnull
+	@NonNull
 	EmailChannel getFrom();
 
 	/**
@@ -29,7 +28,7 @@ public interface RenderedEmail
 	 * @return
 	 *   list of e-mails to send directly to
 	 */
-	@Nonnull
+	@NonNull
 	List<EmailChannel> getTo();
 
 	/**
@@ -38,7 +37,7 @@ public interface RenderedEmail
 	 * @return
 	 *   list of e-mails to include as CC
 	 */
-	@Nonnull
+	@NonNull
 	List<EmailChannel> getCC();
 
 	/**
@@ -47,7 +46,7 @@ public interface RenderedEmail
 	 * @return
 	 *   title of the e-mail, never {@code null}
 	 */
-	@Nonnull
+	@NonNull
 	String getTitle();
 
 	/**
@@ -57,7 +56,7 @@ public interface RenderedEmail
 	 * @return
 	 *   plain text of e-mail, or empty optional if no plain text
 	 */
-	@Nonnull
+	@NonNull
 	Optional<String> getPlainText();
 
 	/**
@@ -67,7 +66,7 @@ public interface RenderedEmail
 	 * @return
 	 *   HTML of e-mail, or empty optional if no HTML
 	 */
-	@Nonnull
+	@NonNull
 	Optional<String> getHTML();
 
 	/**
@@ -78,6 +77,6 @@ public interface RenderedEmail
 	 * @return
 	 *   set with tags
 	 */
-	@Nonnull
+	@NonNull
 	Set<String> getTags();
 }
