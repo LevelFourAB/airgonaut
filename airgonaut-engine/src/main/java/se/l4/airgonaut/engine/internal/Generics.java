@@ -1,12 +1,11 @@
 package se.l4.airgonaut.engine.internal;
 
 import java.lang.reflect.Type;
-import java.util.List;
-
-import com.fasterxml.classmate.ResolvedType;
+import java.util.Optional;
 
 import se.l4.airgonaut.engine.NotificationRenderer;
 import se.l4.commons.types.Types;
+import se.l4.commons.types.reflect.TypeRef;
 
 /**
  * Utilities for working with some common generics functions used in the
@@ -30,24 +29,22 @@ public class Generics
 	 */
 	public static Class<?> findGenericDataTypeOfRenderer(Type renderer)
 	{
-		ResolvedType rt = Types.resolve(renderer);
+		TypeRef type = Types.reference(renderer);
 
-		ResolvedType renderererInterface = rt.findSupertype(NotificationRenderer.class);
-		if(renderererInterface == null)
+		Optional<TypeRef> renderererInterface = type.findSuperclassOrInterface(NotificationRenderer.class);
+		if(! renderererInterface.isPresent())
 		{
 			throw new IllegalStateException("The renderer " + renderer + " does not implement NotificationRenderer");
 		}
 
-		List<ResolvedType> parameters = renderererInterface.getTypeParameters();
-		if(parameters.isEmpty())
+		Optional<TypeRef> parameter = renderererInterface.get().getTypeParameter(0);
+		if(! parameter.isPresent())
 		{
 			// Make sure that we have access to the
 			throw new IllegalStateException("The renderer " + renderer + " does not specify type parameters when implementing it's renderer interface");
 		}
 
-		// Return the first parameter as that is the ones used for
-		ResolvedType dataType = parameters.get(0);
-		return dataType.getErasedType();
+		return parameter.get().getErasedType();
 	}
 
 }
