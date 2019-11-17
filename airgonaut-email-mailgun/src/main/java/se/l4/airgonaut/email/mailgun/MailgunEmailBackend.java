@@ -3,6 +3,9 @@ package se.l4.airgonaut.email.mailgun;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import javax.annotation.Nonnull;
 
 import kong.unirest.HttpResponse;
 import kong.unirest.MultipartBody;
@@ -32,11 +35,15 @@ public class MailgunEmailBackend
 	private final String apiKey;
 
 	public MailgunEmailBackend(
-		String baseUrl,
-		String domain,
-		String apiKey
+		@Nonnull String baseUrl,
+		@Nonnull String domain,
+		@Nonnull String apiKey
 	)
 	{
+		Objects.requireNonNull(baseUrl);
+		Objects.requireNonNull(domain);
+		Objects.requireNonNull(apiKey);
+
 		this.endpoint = baseUrl + '/' + domain + "/messages";
 		this.apiKey = apiKey;
 	}
