@@ -16,6 +16,14 @@ import se.l4.airgonaut.channels.EmailChannel;
 public interface RenderedEmail
 {
 	/**
+	 * Get the {@link EmailChannel} this e-mail is from.
+	 *
+	 * @return
+	 */
+	@Nonnull
+	EmailChannel getFrom();
+
+	/**
 	 * Get the {@link EmailChannel}s to send to.
 	 *
 	 * @return

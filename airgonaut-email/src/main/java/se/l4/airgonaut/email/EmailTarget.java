@@ -2,7 +2,10 @@ package se.l4.airgonaut.email;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import javax.annotation.Nonnull;
 
 import se.l4.airgonaut.NotificationData;
 import se.l4.airgonaut.channels.ContactChannel;
@@ -24,12 +27,18 @@ public class EmailTarget
 	implements NotificationTarget<EmailChannel>
 {
 	private final EmailBackend backend;
+	private final EmailChannel defaultFrom;
 	private final EmailTemplate template;
 
-	public EmailTarget(EmailBackend backend, EmailTemplate template)
+	public EmailTarget(
+		@Nonnull EmailBackend backend,
+		@Nonnull EmailChannel defaultFrom,
+		@Nonnull EmailTemplate template
+	)
 	{
-		this.backend = backend;
-		this.template = template;
+		this.defaultFrom = Objects.requireNonNull(defaultFrom);
+		this.backend = Objects.requireNonNull(backend);
+		this.template = Objects.requireNonNull(template);
 	}
 
 	@Override
@@ -128,6 +137,8 @@ public class EmailTarget
 
 		// Construct the final e-mail that will be sent
 		RenderedEmail email = new RenderedEmailImpl(
+			defaultFrom,
+
 			Collections.singletonList(encounter.getChannel()),
 			Collections.emptyList(),
 			templateEncounter.getTitle(),

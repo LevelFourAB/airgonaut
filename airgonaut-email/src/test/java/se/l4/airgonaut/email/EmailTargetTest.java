@@ -25,7 +25,11 @@ public class EmailTargetTest
 	public void setup()
 	{
 		backend = new TestEmailBackend();
-		target = new EmailTarget(backend, new TestEmailTemplate());
+		target = new EmailTarget(
+			backend,
+			EmailChannel.create("test@example.org"),
+			new TestEmailTemplate()
+		);
 		notifications = LocalNotifications.builder()
 			.addTarget(target)
 			.addRenderer(new TestDataRenderer())

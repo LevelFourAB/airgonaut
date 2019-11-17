@@ -16,6 +16,7 @@ import se.l4.airgonaut.email.RenderedEmail;
 public class RenderedEmailImpl
 	implements RenderedEmail
 {
+	private final EmailChannel from;
 	private final List<EmailChannel> to;
 	private final List<EmailChannel> cc;
 
@@ -27,6 +28,7 @@ public class RenderedEmailImpl
 	private final Set<String> tags;
 
 	public RenderedEmailImpl(
+		@Nonnull EmailChannel from,
 		@Nonnull List<EmailChannel> to,
 		@Nonnull List<EmailChannel> cc,
 		@Nonnull String title,
@@ -35,6 +37,7 @@ public class RenderedEmailImpl
 		@Nonnull Set<String> tags
 	)
 	{
+		this.from = Objects.requireNonNull(from);
 		this.to = Objects.requireNonNull(to);
 		this.cc = Objects.requireNonNull(cc);
 
@@ -44,6 +47,12 @@ public class RenderedEmailImpl
 		this.html = Objects.requireNonNull(html);
 
 		this.tags = Objects.requireNonNull(tags);
+	}
+
+	@Override
+	public EmailChannel getFrom()
+	{
+		return from;
 	}
 
 	@Override

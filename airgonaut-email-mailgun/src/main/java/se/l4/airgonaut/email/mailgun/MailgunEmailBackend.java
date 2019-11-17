@@ -47,6 +47,7 @@ public class MailgunEmailBackend
 	{
 		MultipartBody request = Unirest.post(endpoint)
 			.basicAuth("api", apiKey)
+			.field("from", EmailChannelEncoding.encode(email.getFrom()))
 			.field("to", toAddresses(email.getTo()))
 			.field("cc", toAddresses(email.getCC()));
 
@@ -59,8 +60,6 @@ public class MailgunEmailBackend
 		{
 			request = request.field("html", email.getHTML().get());
 		}
-
-		// TODO: From?
 
 		HttpResponse<?> reply = request.asJson();
 		if(! reply.isSuccess())
