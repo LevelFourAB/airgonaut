@@ -2,10 +2,10 @@
 
 > **airgonaut**. One who journeys through the air.
 
-Airgonaut is a Java-library to help implement great notifications for your users.
-Great notifications are hard, especially when you take into accounts things
-such as multiple devices, the wish of users to receive notifications digested
-or only on some devices, and localization of messages.
+Airgonaut is a Java-library to help implement great notifications for your
+users. Great notifications are hard, especially when you take into account
+things such as multiple devices, the wish of users to receive notifications
+digested or only on some devices, and localization of messages.
 
 This library provides building blocks to implement notifications in your
 backend and to give both you and your users control over how notifications are
@@ -15,11 +15,43 @@ Airgonaut provides:
 
 * An interface to trigger notifications in your backend
 * Multiple targets, such as e-mail and sms, with individual rendering for each target
-* Planned: Support for digests, per notification target and type of notification
+* Control over which channels a user receives a notification on
+* Planned: Support for digests
 
-## Status
+## License
 
-Unreleased, in active development for now. Maven snapshots are not yet available.
+This project is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0),
+see the file `LICENSE` and `NOTICE` for details.
+
+## Usage via Maven
+
+This library does not have a stable release yet, but snapshots are available:
+
+```xml
+<dependency>
+  <groupId>se.l4.airgonaut</groupId>
+  <artifactId>airgonaut-engine</artifactId>
+  <version>0.1-SNAPSHOT</version>
+</dependency>
+```
+
+### Snapshot repository
+
+Snapshot releases are available via the Sonatype OSS repository:
+
+```xml
+<repository>
+  <id>maven-snapshots</id>
+  <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+  <layout>default</layout>
+  <releases>
+    <enabled>false</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
+```
 
 ## Sending notifications
 
@@ -36,7 +68,7 @@ notifications.newNotification()
 ```
 
 Notifications can be sent both to a specific receiver via a `ContactChannel`
-such as `Email` or using a `NotificationReceiver` than can resolve which
+such as `EmailChannel` or using a `NotificationReceiver` than can resolve which
 channels a notification should be sent to:
 
 ```java
@@ -108,7 +140,7 @@ Notifications notifications = LocalNotifications.builder()
   .build();
 ```
 
-### E-mail target
+## E-mail target
 
 E-mails are a common way to deliver notifications and this library provides
 support for rendering notifications into e-mails.
@@ -119,6 +151,44 @@ a target:
 ```java
 new EmailTarget(
   new EmailBackendHere(),
+  EmailChannel.create("support@example.com"),
   emailTemplateRenderer
 )
+```
+
+### Rendering `NotificationData`
+
+The e-mail target depends on implementations of `EmailRenderer` for a specific
+`NotificationData` class. If no implementation is found the notification will
+not be delivered via e-mail.
+
+```java
+class NotificationDataTypeEmailRenderer implements EmailRenderer<NotificationDataType> {
+  public void render(EmailRenderingEncounter<NotificationDataType> encounter) {
+    NotificationDataType data = encounter.getData();
+
+    // Set title and plain text / HTML contents here
+  }
+}
+```
+
+The encounter supports rendering using a `TemplateEngine` which is useful
+especially for HTML rendering.
+
+### Rendering the final e-mail
+
+The `EmailTarget` requires an instance of `EmailTemplate` that is used to
+render the final e-mail.
+
+```java
+class CustomEmailTemplate implements EmailTemplate {
+  public void render(EmailTemplateEncounter encounter) {
+    List<RenderedEmailNotification> notifications = encounter.getEntries();
+
+    /*
+     * Combine the rendered notifications and then set title and plain text / HTML
+     * contents.
+     */
+  }
+}
 ```
